@@ -1,5 +1,8 @@
 # VueとGoとMySQLでSPAサンプル
 
+作る流れはQiitaに投稿しました。あわせて見ていただけると幸いです。
+https://qiita.com/aocm/items/6c525ff54167717c5e3b
+
 ## ゴール
 ### Must
 - Git管理できること
@@ -8,7 +11,6 @@
 ### Optional
 - 文字列をDBに登録できること
 - 過去の入力したすべての文字列をブラウザで閲覧できること
-
 
 ## TODO
 - [x] Git管理できること

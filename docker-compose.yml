@@ -1,7 +1,7 @@
 version: '3'
 services:
 
-  # card Server
+  # Go Server
   server:
     build: 
       context: ./server
