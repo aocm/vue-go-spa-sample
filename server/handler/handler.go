@@ -18,6 +18,12 @@ func YamabikoAPI() echo.HandlerFunc {
 		if err := c.Bind(param); err != nil {
 			return err
 		}
-		return c.JSON(http.StatusOK, map[string]interface{}{"hello": param.Message})
+		return c.JSON(http.StatusOK, map[string]interface{}{"message": param.Message})
+	}
+}
+
+func OptionsCheck() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		return nil
 	}
 }
