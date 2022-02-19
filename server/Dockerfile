@@ -1,5 +1,5 @@
 # ベースとなるDockerイメージ指定(作成時のLatest)
-FROM golang:1.14.6
+FROM golang:1.16.6
 
 # コンテナ内に作業ディレクトリを作成
 RUN mkdir -p /go/src/github.com/aocm/vue-go-spa-sample
