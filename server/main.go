@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/aocm/vue-go-spa-sample/handler"
+	"github.com/aocm/vue-go-spa-sample/server/handler"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
