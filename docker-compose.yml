@@ -11,7 +11,8 @@ services:
       - 8000:8000
     tty: true # コンテナの起動永続化
     volumes:
-      - ./server:/go/src/github.com/aocm/vue-go-spa-sample
+      - ./server:/go/src/github.com/aocm/vue-go-spa-sample/server
+      - .git:/go/src/github.com/aocm/vue-go-spa-sample/.git
     depends_on:
       - 'db'
   # client
@@ -24,7 +25,8 @@ services:
       - 8080:8080
     tty: true # コンテナの起動永続化
     volumes:
-      - ./client:/usr/src/app
+      - ./client:/usr/src/app/client
+      - .git:/usr/src/app/.git
   # DB
   db:
     build:
