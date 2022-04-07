@@ -26,6 +26,18 @@ func YamabikoAPI() echo.HandlerFunc {
 	}
 }
 
+func GetHistory() echo.HandlerFunc {
+	var dbmap = accessor.ConnectDB(accessor.MysqlAccessor{})
+	return func(c echo.Context) error {
+		var histroy []accessor.Message
+		_, err := dbmap.Select(&histroy, "select * from message")
+		if err != nil {
+			fmt.Println("error! %v", err)
+		}
+		return c.JSON(http.StatusOK, map[string]interface{}{"history": histroy})
+	}
+}
+
 func saveMessge(text string) bool {
 	var dbmap = accessor.ConnectDB(accessor.MysqlAccessor{})
 	var txmap, err = accessor.StartTransaction(accessor.MysqlAccessor{}, dbmap)

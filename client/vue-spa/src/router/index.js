@@ -23,6 +23,11 @@ const routes = [
     name: 'Yamabiko',
     component: () => import(/* webpackChunkName: "yamabiko" */ '../views/Yamabiko.vue'),
   },
+  {
+    path: '/history',
+    name: 'History',
+    component: () => import(/* webpackChunkName: "yamabiko" */ '../views/History.vue'),
+  },
 ];
 
 const router = new VueRouter({

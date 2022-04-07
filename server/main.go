@@ -19,6 +19,7 @@ func main() {
 
 	// ルーティング
 	e.POST("/yamabiko", handler.YamabikoAPI())
+	e.GET("/yamabiko", handler.GetHistory())
 	e.OPTIONS("/yamabiko", handler.OptionsCheck())
 
 	// サーバー起動
