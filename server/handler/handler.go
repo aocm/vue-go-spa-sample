@@ -14,7 +14,6 @@ type YamabikoParam struct {
 }
 
 // YamabikoAPI は /api/hello のPost時のJSONデータ生成処理を行います。
-
 func YamabikoAPI() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		param := new(YamabikoParam)
@@ -26,11 +25,12 @@ func YamabikoAPI() echo.HandlerFunc {
 	}
 }
 
+// 一覧取得（20件まで、新しい順）
 func GetHistory() echo.HandlerFunc {
 	var dbmap = accessor.ConnectDB(accessor.MysqlAccessor{})
 	return func(c echo.Context) error {
 		var histroy []accessor.Message
-		_, err := dbmap.Select(&histroy, "select * from message")
+		_, err := dbmap.Select(&histroy, "select * from message order by id desc limit 20")
 		if err != nil {
 			fmt.Println("error! %v", err)
 		}
