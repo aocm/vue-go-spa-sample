@@ -1,8 +1,10 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
+	"github.com/aocm/vue-go-spa-sample/server/infra/accessor"
 	"github.com/labstack/echo"
 )
 
@@ -18,7 +20,40 @@ func YamabikoAPI() echo.HandlerFunc {
 		if err := c.Bind(param); err != nil {
 			return err
 		}
+		saveMessge(param.Message)
 		return c.JSON(http.StatusOK, map[string]interface{}{"message": param.Message})
+	}
+}
+
+// 一覧取得（20件まで、新しい順）
+func GetHistory() echo.HandlerFunc {
+	var dbmap = accessor.ConnectDB(accessor.MysqlAccessor{})
+	return func(c echo.Context) error {
+		var histroy []accessor.Message
+		_, err := dbmap.Select(&histroy, "select * from message order by id desc limit 20")
+		if err != nil {
+			fmt.Println("error! %v", err)
+		}
+		return c.JSON(http.StatusOK, map[string]interface{}{"history": histroy})
+	}
+}
+
+func saveMessge(text string) bool {
+	var dbmap = accessor.ConnectDB(accessor.MysqlAccessor{})
+	var txmap, err = accessor.StartTransaction(accessor.MysqlAccessor{}, dbmap)
+	message := accessor.Message{
+		Text: text,
+	}
+	err = txmap.Insert(&message)
+	defer dbmap.Db.Close()
+
+	fmt.Println(err)
+	if err == nil {
+		txmap.Commit()
+		return true
+	} else {
+		txmap.Rollback()
+		return false
 	}
 }
 
